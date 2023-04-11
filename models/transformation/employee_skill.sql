@@ -26,7 +26,7 @@ final as (
     from employee e
     left join employee_skill es on e.id = es.e_id
     left join skill s on es.s_id = s.id
-    group by e.id
+    group by e.id, e.full_name
 )
 
 select * from final
