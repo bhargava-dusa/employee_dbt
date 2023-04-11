@@ -25,7 +25,7 @@ final as (
         STRING_AGG(s.s_name, ', ') as skills
     from employee e
     left join employee_skill es on e.id = es.eid
-    left join skill s es.s_id = s.id
+    left join skill s on es.s_id = s.id
     group by e.id
 )
 
