@@ -1,0 +1,13 @@
+version: 2
+sources:
+- name: refined_employee_schema
+  quoting:
+    database: true
+    schema: false
+    identifier: false
+  tables:
+  - name: _airbyte_raw_dest_employee
+  - name: _airbyte_raw_dest_employee_project
+  - name: _airbyte_raw_dest_employee_skill
+  - name: _airbyte_raw_dest_project
+  - name: _airbyte_raw_dest_skill

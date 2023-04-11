@@ -1,0 +1,72 @@
+name: airbyte_utils
+version: '1.0'
+config-version: 2
+profile: normalize
+model-paths:
+- models
+docs-paths:
+- docs
+analysis-paths:
+- analysis
+test-paths:
+- tests
+seed-paths:
+- data
+macro-paths:
+- macros
+target-path: ../build
+log-path: ../logs
+packages-install-path: ../dbt
+clean-targets:
+- build
+- dbt_modules
+quoting:
+  database: true
+  schema: false
+  identifier: true
+models:
+  airbyte_utils:
+    +materialized: table
+    generated:
+      airbyte_ctes:
+        +tags: airbyte_internal_cte
+        +materialized: ephemeral
+      airbyte_incremental:
+        +tags: incremental_tables
+        +materialized: incremental
+        +on_schema_change: sync_all_columns
+      airbyte_tables:
+        +tags: normalized_tables
+        +materialized: table
+      airbyte_views:
+        +tags: airbyte_internal_views
+        +materialized: view
+dispatch:
+- macro_namespace: dbt_utils
+  search_order:
+  - airbyte_utils
+  - dbt_utils
+vars:
+  json_column: _airbyte_data
+  models_to_source:
+    dest_employee_ab1: refined_employee_schema._airbyte_raw_dest_employee
+    dest_employee_ab2: refined_employee_schema._airbyte_raw_dest_employee
+    dest_employee_stg: refined_employee_schema._airbyte_raw_dest_employee
+    dest_employee_scd: refined_employee_schema._airbyte_raw_dest_employee
+    dest_employee: refined_employee_schema._airbyte_raw_dest_employee
+    dest_employee_skill_ab1: refined_employee_schema._airbyte_raw_dest_employee_skill
+    dest_employee_skill_ab2: refined_employee_schema._airbyte_raw_dest_employee_skill
+    dest_employee_skill_ab3: refined_employee_schema._airbyte_raw_dest_employee_skill
+    dest_employee_skill: refined_employee_schema._airbyte_raw_dest_employee_skill
+    dest_employee_project_ab1: refined_employee_schema._airbyte_raw_dest_employee_project
+    dest_employee_project_ab2: refined_employee_schema._airbyte_raw_dest_employee_project
+    dest_employee_project_ab3: refined_employee_schema._airbyte_raw_dest_employee_project
+    dest_employee_project: refined_employee_schema._airbyte_raw_dest_employee_project
+    dest_project_ab1: refined_employee_schema._airbyte_raw_dest_project
+    dest_project_ab2: refined_employee_schema._airbyte_raw_dest_project
+    dest_project_ab3: refined_employee_schema._airbyte_raw_dest_project
+    dest_project: refined_employee_schema._airbyte_raw_dest_project
+    dest_skill_ab1: refined_employee_schema._airbyte_raw_dest_skill
+    dest_skill_ab2: refined_employee_schema._airbyte_raw_dest_skill
+    dest_skill_ab3: refined_employee_schema._airbyte_raw_dest_skill
+    dest_skill: refined_employee_schema._airbyte_raw_dest_skill
