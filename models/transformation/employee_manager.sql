@@ -2,7 +2,7 @@ with employee as (
     select 
         employee_id as id,
         manager_id as m_id,
-        concat(first_name, ' ', last_name) full_name
+        concat(first_name, ' ', last_name) as full_name
     from {{ ref('dest_employee') }}
 ),
 

@@ -1,14 +1,14 @@
 with employee as (
     select 
         employee_id as id,
-        concat(first_name, ' ', last_name) full_name
+        concat(first_name, ' ', last_name) as full_name
     from {{ ref('dest_employee') }}
 ),
 
 skill as (
     select 
-        skill_name s_name,
-        skill_id id
+        skill_name as s_name,
+        skill_id as id
     from {{ ref('dest_skill') }}
 ),
 
